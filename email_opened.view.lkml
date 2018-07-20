@@ -4,6 +4,7 @@ view: email_opened {
   dimension: id {
     primary_key: yes
     type: string
+    hidden: yes
     sql: ${TABLE}.id ;;
   }
 
@@ -32,30 +33,30 @@ view: email_opened {
     sql: ${TABLE}.city ;;
   }
 
-  dimension: context_integration_name {
-    type: string
-    sql: ${TABLE}.context_integration_name ;;
-  }
-
-  dimension: context_integration_version {
-    type: string
-    sql: ${TABLE}.context_integration_version ;;
-  }
-
-  dimension: context_ip {
-    type: string
-    sql: ${TABLE}.context_ip ;;
-  }
-
-  dimension: context_library_name {
-    type: string
-    sql: ${TABLE}.context_library_name ;;
-  }
-
-  dimension: context_library_version {
-    type: string
-    sql: ${TABLE}.context_library_version ;;
-  }
+#   dimension: context_integration_name {
+#     type: string
+#     sql: ${TABLE}.context_integration_name ;;
+#   }
+#
+#   dimension: context_integration_version {
+#     type: string
+#     sql: ${TABLE}.context_integration_version ;;
+#   }
+#
+#   dimension: context_ip {
+#     type: string
+#     sql: ${TABLE}.context_ip ;;
+#   }
+#
+#   dimension: context_library_name {
+#     type: string
+#     sql: ${TABLE}.context_library_name ;;
+#   }
+#
+#   dimension: context_library_version {
+#     type: string
+#     sql: ${TABLE}.context_library_version ;;
+#   }
 
   dimension: context_os_name {
     type: string
@@ -72,10 +73,10 @@ view: email_opened {
     sql: ${TABLE}.context_user_agent ;;
   }
 
-  dimension: created_at {
-    type: string
-    sql: ${TABLE}.created_at ;;
-  }
+#   dimension: created_at {
+#     type: string
+#     sql: ${TABLE}.created_at ;;
+#   }
 
   dimension: email {
     type: string
@@ -97,29 +98,29 @@ view: email_opened {
     sql: ${TABLE}.event ;;
   }
 
-  dimension: event_text {
-    type: string
-    sql: ${TABLE}.event_text ;;
-  }
+#   dimension: event_text {
+#     type: string
+#     sql: ${TABLE}.event_text ;;
+#   }
 
   dimension: experiment_id {
     type: number
     sql: ${TABLE}.experiment_id ;;
   }
 
-  dimension_group: loaded {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.loaded_at ;;
-  }
+#   dimension_group: loaded {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.loaded_at ;;
+#   }
 
   dimension: message_id {
     type: string
@@ -131,24 +132,24 @@ view: email_opened {
     sql: ${TABLE}.message_type_id ;;
   }
 
-  dimension: original_timestamp {
-    type: string
-    sql: ${TABLE}.original_timestamp ;;
-  }
+#   dimension: original_timestamp {
+#     type: string
+#     sql: ${TABLE}.original_timestamp ;;
+#   }
 
-  dimension_group: received {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.received_at ;;
-  }
+#   dimension_group: received {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.received_at ;;
+#   }
 
   dimension: region {
     type: string
@@ -179,19 +180,19 @@ view: email_opened {
     sql: ${TABLE}.template_name ;;
   }
 
-  dimension_group: timestamp {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.timestamp ;;
-  }
+#   dimension_group: timestamp {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.timestamp ;;
+#   }
 
   dimension: user_agent_device {
     type: string
@@ -203,19 +204,19 @@ view: email_opened {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension_group: uuid_ts {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.uuid_ts ;;
-  }
+#   dimension_group: uuid_ts {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.uuid_ts ;;
+#   }
 
   dimension: workflow_id {
     type: number
@@ -232,14 +233,17 @@ view: email_opened {
     drill_fields: [detail*]
   }
 
+  measure: distinct_emails {
+    type:  count_distinct
+    sql: ${email_id} ;;
+    drill_fields: [detail*]
+  }
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
       id,
       workflow_name,
       campaign_name,
-      context_integration_name,
-      context_library_name,
       template_name,
       context_os_name
     ]

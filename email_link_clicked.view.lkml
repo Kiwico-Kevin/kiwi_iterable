@@ -252,6 +252,11 @@ view: email_link_clicked {
     drill_fields: [detail*]
   }
 
+  measure: distinct_emails {
+    type:  count_distinct
+    sql: ${email_id} ;;
+    drill_fields: [detail*]
+  }
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

@@ -32,35 +32,35 @@ view: email_delivered {
     sql: ${TABLE}.content_id ;;
   }
 
-  dimension: context_integration_name {
-    type: string
-    sql: ${TABLE}.context_integration_name ;;
-  }
+#   dimension: context_integration_name {
+#     type: string
+#     sql: ${TABLE}.context_integration_name ;;
+#   }
 
-  dimension: context_integration_version {
-    type: string
-    sql: ${TABLE}.context_integration_version ;;
-  }
+#   dimension: context_integration_version {
+#     type: string
+#     sql: ${TABLE}.context_integration_version ;;
+#   }
+#
+#   dimension: context_library_name {
+#     type: string
+#     sql: ${TABLE}.context_library_name ;;
+#   }
+#
+#   dimension: context_library_version {
+#     type: string
+#     sql: ${TABLE}.context_library_version ;;
+#   }
+#
+#   dimension: context_traits_email {
+#     type: string
+#     sql: ${TABLE}.context_traits_email ;;
+#   }
 
-  dimension: context_library_name {
-    type: string
-    sql: ${TABLE}.context_library_name ;;
-  }
-
-  dimension: context_library_version {
-    type: string
-    sql: ${TABLE}.context_library_version ;;
-  }
-
-  dimension: context_traits_email {
-    type: string
-    sql: ${TABLE}.context_traits_email ;;
-  }
-
-  dimension: created_at {
-    type: string
-    sql: ${TABLE}.created_at ;;
-  }
+#   dimension: created_at {
+#     type: string
+#     sql: ${TABLE}.created_at ;;
+#   }
 
   dimension: email {
     type: string
@@ -81,64 +81,64 @@ view: email_delivered {
     type: string
     sql: ${TABLE}.event ;;
   }
-
-  dimension: event_text {
-    type: string
-    sql: ${TABLE}.event_text ;;
-  }
+#
+#   dimension: event_text {
+#     type: string
+#     sql: ${TABLE}.event_text ;;
+#   }
 
   dimension: experiment_id {
     type: number
     sql: ${TABLE}.experiment_id ;;
   }
 
-  dimension_group: loaded {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.loaded_at ;;
-  }
-
-  dimension: message_bus_id {
-    type: string
-    sql: ${TABLE}.message_bus_id ;;
-  }
+#   dimension_group: loaded {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.loaded_at ;;
+#   }
+#
+#   dimension: message_bus_id {
+#     type: string
+#     sql: ${TABLE}.message_bus_id ;;
+#   }
 
   dimension: message_id {
     type: string
     sql: ${TABLE}.message_id ;;
   }
-
-  dimension: message_type_id {
-    type: number
-    sql: ${TABLE}.message_type_id ;;
-  }
-
-  dimension: original_timestamp {
-    type: string
-    sql: ${TABLE}.original_timestamp ;;
-  }
-
-  dimension_group: received {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.received_at ;;
-  }
+#
+#   dimension: message_type_id {
+#     type: number
+#     sql: ${TABLE}.message_type_id ;;
+#   }
+#
+#   dimension: original_timestamp {
+#     type: string
+#     sql: ${TABLE}.original_timestamp ;;
+#   }
+#
+#   dimension_group: received {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.received_at ;;
+#   }
 
   dimension_group: sent {
     type: time
@@ -163,20 +163,20 @@ view: email_delivered {
     type: string
     sql: ${TABLE}.template_name ;;
   }
-
-  dimension_group: timestamp {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.timestamp ;;
-  }
+#
+#   dimension_group: timestamp {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.timestamp ;;
+#   }
 
   dimension: transactional_data {
     type: string
@@ -187,20 +187,20 @@ view: email_delivered {
     type: string
     sql: ${TABLE}.user_id ;;
   }
-
-  dimension_group: uuid_ts {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.uuid_ts ;;
-  }
+#
+#   dimension_group: uuid_ts {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.uuid_ts ;;
+#   }
 
   dimension: workflow_id {
     type: number
@@ -217,14 +217,18 @@ view: email_delivered {
     drill_fields: [detail*]
   }
 
+  measure: distinct_emails {
+    type:  count_distinct
+    sql: ${email_id} ;;
+    drill_fields: [detail*]
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
       id,
       workflow_name,
       campaign_name,
-      context_integration_name,
-      context_library_name,
       template_name
     ]
   }
