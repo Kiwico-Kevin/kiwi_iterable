@@ -22,6 +22,18 @@ view: email_delivered {
     sql: ${TABLE}.campaign_name ;;
   }
 
+  dimension: email_series_number{
+    sql:
+      CASE
+        WHEN ${campaign_name} LIKE '%.1.%' OR ${campaign_name} LIKE '%EM 1%' OR ${campaign_name} LIKE '%+ Content%' OR ${campaign_name} LIKE '%+ content%' OR ${campaign_name} LIKE '%EM1%'   THEN '1st Email'
+        WHEN ${campaign_name} LIKE '%.2.%' OR ${campaign_name} LIKE '%EM 2%' OR ${campaign_name} LIKE '%EM2%' THEN '2nd Email'
+        WHEN ${campaign_name} LIKE '%.3.%' OR ${campaign_name} LIKE '%EM 3%' OR ${campaign_name} LIKE '%EM3%' THEN '3rd Email'
+        WHEN ${campaign_name} LIKE '%.4.%' OR ${campaign_name} LIKE '%EM 4%' OR ${campaign_name} LIKE '%EM4%' THEN '4th Email'
+        ELSE 'Other'
+    END;;
+  }
+
+
   dimension: channel_id {
     type: number
     sql: ${TABLE}.channel_id ;;
@@ -219,7 +231,7 @@ view: email_delivered {
 
   measure: distinct_emails {
     type:  count_distinct
-    sql: ${email_id} ;;
+    sql: ${email} ;;
     drill_fields: [detail*]
   }
 
