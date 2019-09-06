@@ -130,6 +130,11 @@ view: unsubscribed_view {
     sql: ${TABLE}.received_at ;;
   }
 
+  dimension: recipient_state {
+    type: string
+    sql: ${TABLE}.recipient_state ;;
+  }
+
   dimension_group: sent {
     type: time
     timeframes: [
@@ -142,6 +147,11 @@ view: unsubscribed_view {
       year
     ]
     sql: ${TABLE}.sent_at ;;
+  }
+
+  dimension: status {
+    type: string
+    sql: ${TABLE}.status ;;
   }
 
   dimension: template_id {
@@ -173,6 +183,11 @@ view: unsubscribed_view {
     sql: ${TABLE}.unsub_source ;;
   }
 
+  dimension: user_id {
+    type: string
+    sql: ${TABLE}.user_id ;;
+  }
+
   dimension_group: uuid_ts {
     type: time
     timeframes: [
@@ -187,8 +202,30 @@ view: unsubscribed_view {
     sql: ${TABLE}.uuid_ts ;;
   }
 
+  dimension: workflow_id {
+    type: number
+    sql: ${TABLE}.workflow_id ;;
+  }
+
+  dimension: workflow_name {
+    type: string
+    sql: ${TABLE}.workflow_name ;;
+  }
+
   measure: count {
     type: count
-    drill_fields: [id, campaign_name, context_integration_name, context_library_name, template_name]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      id,
+      workflow_name,
+      campaign_name,
+      context_integration_name,
+      context_library_name,
+      template_name
+    ]
   }
 }

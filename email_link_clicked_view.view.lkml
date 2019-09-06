@@ -1,246 +1,266 @@
 view: email_link_clicked_view {
   sql_table_name: iterable.email_link_clicked_view ;;
+dimension: id {
+  primary_key: yes
+  type: string
+  hidden: yes
+  sql: ${TABLE}.id ;;
+}
 
-  dimension: id {
-    primary_key: yes
+dimension: anonymous_id {
+  type: string
+  sql: ${TABLE}.anonymous_id ;;
+}
+
+dimension: campaign_id {
+  type: number
+  sql: ${TABLE}.campaign_id ;;
+}
+
+dimension: campaign_name {
+  type: string
+  sql: ${TABLE}.campaign_name ;;
+}
+
+dimension: channel_id {
+  type: number
+  sql: ${TABLE}.channel_id ;;
+}
+
+dimension: city {
+  type: string
+  sql: ${TABLE}.city ;;
+}
+
+  dimension: labels {
     type: string
-    sql: ${TABLE}.id ;;
+    sql: ${TABLE}.labels ;;
   }
 
-  dimension: anonymous_id {
-    type: string
-    sql: ${TABLE}.anonymous_id ;;
+  dimension: email_series_number{
+    sql:
+      CASE
+        WHEN ${campaign_name} LIKE '%.1.%' OR ${campaign_name} LIKE '%EM 1%' OR ${campaign_name} LIKE '%+ Content%' OR ${campaign_name} LIKE '%+ content%' OR ${campaign_name} LIKE '%EM1%'   THEN '1st Email'
+        WHEN ${campaign_name} LIKE '%.2.%' OR ${campaign_name} LIKE '%EM 2%' OR ${campaign_name} LIKE '%EM2%' THEN '2nd Email'
+        WHEN ${campaign_name} LIKE '%.3.%' OR ${campaign_name} LIKE '%EM 3%' OR ${campaign_name} LIKE '%EM3%' THEN '3rd Email'
+        WHEN ${campaign_name} LIKE '%.4.%' OR ${campaign_name} LIKE '%EM 4%' OR ${campaign_name} LIKE '%EM4%' THEN '4th Email'
+        ELSE 'Other'
+    END;;
   }
 
-  dimension: campaign_id {
-    type: number
-    sql: ${TABLE}.campaign_id ;;
-  }
+#   dimension: context_integration_name {
+#     type: string
+#     sql: ${TABLE}.context_integration_name ;;
+#   }
+#
+#   dimension: context_integration_version {
+#     type: string
+#     sql: ${TABLE}.context_integration_version ;;
+#   }
+#
+#   dimension: context_ip {
+#     type: string
+#     sql: ${TABLE}.context_ip ;;
+#   }
+#
+#   dimension: context_library_name {
+#     type: string
+#     sql: ${TABLE}.context_library_name ;;
+#   }
+#
+#   dimension: context_library_version {
+#     type: string
+#     sql: ${TABLE}.context_library_version ;;
+#   }
 
-  dimension: campaign_name {
-    type: string
-    sql: ${TABLE}.campaign_name ;;
-  }
+dimension: context_os_name {
+  type: string
+  sql: ${TABLE}.context_os_name ;;
+}
 
-  dimension: channel_id {
-    type: number
-    sql: ${TABLE}.channel_id ;;
-  }
+dimension: context_traits_email {
+  type: string
+  sql: ${TABLE}.context_traits_email ;;
+}
 
-  dimension: city {
-    type: string
-    sql: ${TABLE}.city ;;
-  }
+dimension: context_user_agent {
+  type: string
+  sql: ${TABLE}.context_user_agent ;;
+}
 
-  dimension: content_id {
-    type: number
-    sql: ${TABLE}.content_id ;;
-  }
+#   dimension: created_at {
+#     type: string
+#     sql: ${TABLE}.created_at ;;
+#   }
 
-  dimension: context_integration_name {
-    type: string
-    sql: ${TABLE}.context_integration_name ;;
-  }
+dimension: email {
+  type: string
+  sql: ${TABLE}.email ;;
+}
 
-  dimension: context_integration_version {
-    type: string
-    sql: ${TABLE}.context_integration_version ;;
-  }
+dimension: email_id {
+  type: string
+  sql: ${TABLE}.email_id ;;
+}
 
-  dimension: context_ip {
-    type: string
-    sql: ${TABLE}.context_ip ;;
-  }
+dimension: email_subject {
+  type: string
+  sql: ${TABLE}.email_subject ;;
+}
 
-  dimension: context_library_name {
-    type: string
-    sql: ${TABLE}.context_library_name ;;
-  }
+dimension: event {
+  type: string
+  sql: ${TABLE}.event ;;
+}
 
-  dimension: context_library_version {
-    type: string
-    sql: ${TABLE}.context_library_version ;;
-  }
+#   dimension: event_text {
+#     type: string
+#     sql: ${TABLE}.event_text ;;
+#   }
 
-  dimension: context_os_name {
-    type: string
-    sql: ${TABLE}.context_os_name ;;
-  }
+dimension: experiment_id {
+  type: number
+  sql: ${TABLE}.experiment_id ;;
+}
 
-  dimension: context_traits_email {
-    type: string
-    sql: ${TABLE}.context_traits_email ;;
-  }
+#   dimension_group: loaded {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.loaded_at ;;
+#   }
 
-  dimension: context_user_agent {
-    type: string
-    sql: ${TABLE}.context_user_agent ;;
-  }
+dimension: message_id {
+  type: string
+  sql: ${TABLE}.message_id ;;
+}
 
-  dimension: created_at {
-    type: string
-    sql: ${TABLE}.created_at ;;
-  }
+dimension: message_type_id {
+  type: number
+  sql: ${TABLE}.message_type_id ;;
+}
 
-  dimension: email {
-    type: string
-    sql: ${TABLE}.email ;;
-  }
+#   dimension: original_timestamp {
+#     type: string
+#     sql: ${TABLE}.original_timestamp ;;
+#   }
 
-  dimension: email_id {
-    type: string
-    sql: ${TABLE}.email_id ;;
-  }
+#   dimension_group: received {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.received_at ;;
+#   }
 
-  dimension: email_subject {
-    type: string
-    sql: ${TABLE}.email_subject ;;
-  }
+dimension: region {
+  type: string
+  sql: ${TABLE}.region ;;
+}
 
-  dimension: event {
-    type: string
-    sql: ${TABLE}.event ;;
-  }
+dimension_group: sent {
+  type: time
+  timeframes: [
+    raw,
+    time,
+    date,
+    week,
+    month,
+    quarter,
+    year
+  ]
+  sql: ${TABLE}.sent_at ;;
+}
 
-  dimension: event_text {
-    type: string
-    sql: ${TABLE}.event_text ;;
-  }
+dimension: template_id {
+  type: number
+  sql: ${TABLE}.template_id ;;
+}
 
-  dimension: href_index {
-    type: number
-    sql: ${TABLE}.href_index ;;
-  }
+dimension: template_name {
+  type: string
+  sql: ${TABLE}.template_name ;;
+}
 
-  dimension: link_url {
-    type: string
-    sql: ${TABLE}.link_url ;;
-  }
+#   dimension_group: timestamp {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.timestamp ;;
+#   }
 
-  dimension_group: loaded {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.loaded_at ;;
-  }
+dimension: user_agent_device {
+  type: string
+  sql: ${TABLE}.user_agent_device ;;
+}
 
-  dimension: message_id {
-    type: string
-    sql: ${TABLE}.message_id ;;
-  }
+dimension: user_id {
+  type: string
+  sql: ${TABLE}.user_id ;;
+}
 
-  dimension: message_type_id {
-    type: number
-    sql: ${TABLE}.message_type_id ;;
-  }
+#   dimension_group: uuid_ts {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.uuid_ts ;;
+#   }
 
-  dimension: original_timestamp {
-    type: string
-    sql: ${TABLE}.original_timestamp ;;
-  }
+dimension: workflow_id {
+  type: number
+  sql: ${TABLE}.workflow_id ;;
+}
 
-  dimension_group: received {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.received_at ;;
-  }
+dimension: workflow_name {
+  type: string
+  sql: ${TABLE}.workflow_name ;;
+}
 
-  dimension: region {
-    type: string
-    sql: ${TABLE}.region ;;
-  }
+measure: count {
+  type: count
+  drill_fields: [detail*]
+}
 
-  dimension_group: sent {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.sent_at ;;
-  }
-
-  dimension: template_id {
-    type: number
-    sql: ${TABLE}.template_id ;;
-  }
-
-  dimension: template_name {
-    type: string
-    sql: ${TABLE}.template_name ;;
-  }
-
-  dimension_group: timestamp {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.timestamp ;;
-  }
-
-  dimension: url {
-    type: string
-    sql: ${TABLE}.url ;;
-  }
-
-  dimension: user_agent_device {
-    type: string
-    sql: ${TABLE}.user_agent_device ;;
-  }
-
-  dimension_group: uuid_ts {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.uuid_ts ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-
-  # ----- Sets of fields for drilling ------
-  set: detail {
-    fields: [
-      id,
-      campaign_name,
-      context_integration_name,
-      context_library_name,
-      template_name,
-      context_os_name
-    ]
-  }
+measure: distinct_emails {
+  type:  count_distinct
+  sql: ${email_id} ;;
+  drill_fields: [detail*]
+}
+# ----- Sets of fields for drilling ------
+set: detail {
+  fields: [
+    id,
+    workflow_name,
+    campaign_name,
+    template_name,
+    context_os_name
+  ]
+}
 }
