@@ -1,5 +1,5 @@
 view: email_opened {
-  sql_table_name: iterable.email_opened ;;
+  sql_table_name: iterable.email_opened_view ;;
 
   dimension: id {
     primary_key: yes
@@ -31,6 +31,17 @@ view: email_opened {
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
+  }
+
+  dimension: email_series_number{
+    sql:
+      CASE
+        WHEN ${campaign_name} LIKE '%.1.%' OR ${campaign_name} LIKE '%EM 1%' OR ${campaign_name} LIKE '%+ Content%' OR ${campaign_name} LIKE '%+ content%' OR ${campaign_name} LIKE '%EM1%'   THEN '1st Email'
+        WHEN ${campaign_name} LIKE '%.2.%' OR ${campaign_name} LIKE '%EM 2%' OR ${campaign_name} LIKE '%EM2%' THEN '2nd Email'
+        WHEN ${campaign_name} LIKE '%.3.%' OR ${campaign_name} LIKE '%EM 3%' OR ${campaign_name} LIKE '%EM3%' THEN '3rd Email'
+        WHEN ${campaign_name} LIKE '%.4.%' OR ${campaign_name} LIKE '%EM 4%' OR ${campaign_name} LIKE '%EM4%' THEN '4th Email'
+        ELSE 'Other'
+    END;;
   }
 
 #   dimension: context_integration_name {
@@ -122,6 +133,11 @@ view: email_opened {
 #     sql: ${TABLE}.loaded_at ;;
 #   }
 
+  dimension: labels {
+    type: string
+    sql: ${TABLE}.labels ;;
+  }
+
   dimension: message_id {
     type: string
     sql: ${TABLE}.message_id ;;
@@ -156,19 +172,19 @@ view: email_opened {
     sql: ${TABLE}.region ;;
   }
 
-  dimension_group: sent {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.sent_at ;;
-  }
+#   dimension_group: sent {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.sent_at ;;
+#   }
 
   dimension: template_id {
     type: number
@@ -180,19 +196,19 @@ view: email_opened {
     sql: ${TABLE}.template_name ;;
   }
 
-#   dimension_group: timestamp {
-#     type: time
-#     timeframes: [
-#       raw,
-#       time,
-#       date,
-#       week,
-#       month,
-#       quarter,
-#       year
-#     ]
-#     sql: ${TABLE}.timestamp ;;
-#   }
+  dimension_group: timestamp {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.timestamp ;;
+  }
 
   dimension: user_agent_device {
     type: string

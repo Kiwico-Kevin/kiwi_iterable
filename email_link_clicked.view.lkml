@@ -1,5 +1,5 @@
 view: email_link_clicked {
-  sql_table_name: iterable.email_link_clicked ;;
+  sql_table_name: iterable.email_link_clicked_view ;;
 
   dimension: id {
     primary_key: yes
@@ -85,6 +85,17 @@ view: email_link_clicked {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
+  }
+
+  dimension: email_series_number{
+    sql:
+      CASE
+        WHEN ${campaign_name} LIKE '%.1.%' OR ${campaign_name} LIKE '%EM 1%' OR ${campaign_name} LIKE '%+ Content%' OR ${campaign_name} LIKE '%+ content%' OR ${campaign_name} LIKE '%EM1%'   THEN '1st Email'
+        WHEN ${campaign_name} LIKE '%.2.%' OR ${campaign_name} LIKE '%EM 2%' OR ${campaign_name} LIKE '%EM2%' THEN '2nd Email'
+        WHEN ${campaign_name} LIKE '%.3.%' OR ${campaign_name} LIKE '%EM 3%' OR ${campaign_name} LIKE '%EM3%' THEN '3rd Email'
+        WHEN ${campaign_name} LIKE '%.4.%' OR ${campaign_name} LIKE '%EM 4%' OR ${campaign_name} LIKE '%EM4%' THEN '4th Email'
+        ELSE 'Other'
+    END;;
   }
 
   dimension: email_id {

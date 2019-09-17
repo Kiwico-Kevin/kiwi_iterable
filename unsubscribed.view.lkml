@@ -1,5 +1,5 @@
 view: unsubscribed {
-  sql_table_name: iterable.unsubscribed ;;
+  sql_table_name: iterable.unsubscribed_view ;;
 
   dimension: id {
     primary_key: yes

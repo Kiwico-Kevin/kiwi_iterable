@@ -1,5 +1,5 @@
 view: email_bounced {
-  sql_table_name: iterable.email_bounced ;;
+  sql_table_name: iterable.email_bounced_view ;;
 
   dimension: id {
     primary_key: yes

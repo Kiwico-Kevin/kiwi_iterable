@@ -14,29 +14,29 @@ persist_with: kiwi_iterable_default_datagroup
 
 #explore: email_bounced_view {}
 
-explore: email_delivered_view {
+explore: email_delivered {
   label: "Email Delivered"
-  join: email_opened_view {
+  join: email_opened {
     view_label: "Email Opened"
     type: left_outer
-    sql_on: ${email_delivered_view.message_id} = ${email_opened_view.message_id} ;;
+    sql_on: ${email_delivered.message_id} = ${email_opened.message_id} ;;
     relationship: many_to_many
   }
-  join: email_link_clicked_view {
+  join: email_link_clicked {
     view_label: "Email Link Clicked"
     type: left_outer
-    sql_on: ${email_delivered_view.message_id} = ${email_link_clicked_view.message_id} ;;
+    sql_on: ${email_delivered.message_id} = ${email_link_clicked.message_id} ;;
     relationship: many_to_many
   }
-  join: email_bounced_view {
+  join: email_bounced {
     view_label: "Email Bounced"
     type: full_outer
-    sql_on: ${email_delivered_view.message_id} = ${email_bounced_view.message_id} ;;
+    sql_on: ${email_delivered.message_id} = ${email_bounced.message_id} ;;
     relationship: many_to_many
   }
-  join: unsubscribed_view {
+  join: unsubscribed{
     type: left_outer
-    sql_on: ${email_delivered_view.email} =${unsubscribed_view.email}  AND ${email_delivered_view.message_id} = ${unsubscribed_view.message_id};;
+    sql_on: ${email_delivered.email} =${unsubscribed.email}  AND ${email_delivered.message_id} = ${unsubscribed.message_id};;
     relationship: many_to_many
   }
 }

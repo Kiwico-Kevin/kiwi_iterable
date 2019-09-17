@@ -1,5 +1,5 @@
 view: email_marked_as_spam {
-  sql_table_name: iterable.email_marked_as_spam ;;
+  sql_table_name: iterable.email_marked_as_spam_view ;;
 
   dimension: id {
     primary_key: yes
