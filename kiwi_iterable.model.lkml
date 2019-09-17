@@ -14,20 +14,24 @@ persist_with: kiwi_iterable_default_datagroup
 
 #explore: email_bounced_view {}
 
-explore: email_delivered {
-  join: email_opened {
+explore: email_delivered_view {
+  label: "Email Delivered"
+  join: email_opened_view {
+    view_label: "Email Opened"
     type: left_outer
-    sql_on: ${email_delivered.message_id} = ${email_opened.message_id} ;;
+    sql_on: ${email_delivered_view.message_id} = ${email_opened_view.message_id} ;;
     relationship: many_to_many
   }
-  join: email_link_clicked {
+  join: email_link_clicked_view {
+    view_label: "Email Link Clicked"
     type: left_outer
-    sql_on: ${email_delivered.message_id} = ${email_link_clicked.message_id} ;;
+    sql_on: ${email_delivered_view.message_id} = ${email_link_clicked_view.message_id} ;;
     relationship: many_to_many
   }
-  join: email_bounced {
+  join: email_bounced_view {
+    view_label: "Email Bounced"
     type: full_outer
-    sql_on: ${email_delivered.message_id} = ${email_bounced.message_id} ;;
+    sql_on: ${email_delivered_view.message_id} = ${email_bounced_view.message_id} ;;
     relationship: many_to_many
   }
   join: unsubscribed_view {
@@ -35,6 +39,9 @@ explore: email_delivered {
     sql_on: ${email_delivered.email} =${unsubscribed_view.email}  AND ${email_delivered.message_id} = ${unsubscribed_view.message_id};;
     relationship: many_to_many
   }
+}
+
+explore: sendgrid_delivered_view {
 }
 
 #explore: email_delivered_view {}

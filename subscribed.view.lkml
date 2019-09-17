@@ -47,6 +47,18 @@ view: subscribed {
     sql: ${TABLE}.context_traits_email ;;
   }
 
+  dimension: context_ip {
+    type: string
+    sql:
+        (
+      SELECT context_ip
+      FROM javascript.pages AS p
+      WHERE p.anonymous_id = ${TABLE}.anonymous_id
+      order by id DESC
+        limit 1
+    ) ;;
+  }
+
   dimension: created_at {
     type: string
     sql: ${TABLE}.created_at ;;

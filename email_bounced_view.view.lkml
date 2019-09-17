@@ -192,8 +192,30 @@ view: email_bounced_view {
     sql: ${TABLE}.uuid_ts ;;
   }
 
+  dimension: workflow_id {
+    type: number
+    sql: ${TABLE}.workflow_id ;;
+  }
+
+  dimension: workflow_name {
+    type: string
+    sql: ${TABLE}.workflow_name ;;
+  }
+
   measure: count {
     type: count
-    drill_fields: [id, campaign_name, context_integration_name, context_library_name, template_name]
+    drill_fields: [detail*]
+  }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+      id,
+      workflow_name,
+      campaign_name,
+      context_integration_name,
+      context_library_name,
+      template_name
+    ]
   }
 }
