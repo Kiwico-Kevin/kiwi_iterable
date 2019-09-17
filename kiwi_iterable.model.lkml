@@ -36,7 +36,7 @@ explore: email_delivered_view {
   }
   join: unsubscribed_view {
     type: left_outer
-    sql_on: ${email_delivered.email} =${unsubscribed_view.email}  AND ${email_delivered.message_id} = ${unsubscribed_view.message_id};;
+    sql_on: ${email_delivered_view.email} =${unsubscribed_view.email}  AND ${email_delivered_view.message_id} = ${unsubscribed_view.message_id};;
     relationship: many_to_many
   }
 }
