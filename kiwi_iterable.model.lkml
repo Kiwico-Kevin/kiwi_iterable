@@ -41,6 +41,20 @@ explore: email_delivered {
   }
 }
 
+explore: sms_delivered {
+#   join: sms_received {
+#     type: full_outer
+#     sql_on: ${sms_delivered.id}=${sms_received.id} ;;
+#     relationship: many_to_many
+#   }
+  join: sms_bounced {
+    type: full_outer
+    sql_on:  ${sms_delivered.campaign_id}=${sms_bounced.campaign_id} ;;
+    relationship: many_to_many
+  }
+}
+
+
 explore: sendgrid_delivered_view {
 }
 
