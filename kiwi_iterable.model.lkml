@@ -41,6 +41,8 @@ explore: email_delivered {
   }
 }
 
+explore: web_push_delivered {}
+
 explore: sms_delivered {
 #   join: sms_received {
 #     type: full_outer

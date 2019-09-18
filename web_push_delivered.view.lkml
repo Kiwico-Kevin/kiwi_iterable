@@ -38,45 +38,45 @@ view: web_push_delivered {
     sql: ${TABLE}.content_id ;;
   }
 
-  dimension: context_integration_name {
-    type: string
-    sql: ${TABLE}.context_integration_name ;;
-  }
-
-  dimension: context_integration_version {
-    type: string
-    sql: ${TABLE}.context_integration_version ;;
-  }
-
-  dimension: context_library_name {
-    type: string
-    sql: ${TABLE}.context_library_name ;;
-  }
-
-  dimension: context_library_version {
-    type: string
-    sql: ${TABLE}.context_library_version ;;
-  }
-
-  dimension: context_traits_email {
-    type: string
-    sql: ${TABLE}.context_traits_email ;;
-  }
-
-  dimension: created_at {
-    type: string
-    sql: ${TABLE}.created_at ;;
-  }
+#   dimension: context_integration_name {
+#     type: string
+#     sql: ${TABLE}.context_integration_name ;;
+#   }
+#
+#   dimension: context_integration_version {
+#     type: string
+#     sql: ${TABLE}.context_integration_version ;;
+#   }
+#
+#   dimension: context_library_name {
+#     type: string
+#     sql: ${TABLE}.context_library_name ;;
+#   }
+#
+#   dimension: context_library_version {
+#     type: string
+#     sql: ${TABLE}.context_library_version ;;
+#   }
+#
+#   dimension: context_traits_email {
+#     type: string
+#     sql: ${TABLE}.context_traits_email ;;
+#   }
+#
+#   dimension: created_at {
+#     type: string
+#     sql: ${TABLE}.created_at ;;
+#   }
 
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
   }
 
-  dimension: email_id {
-    type: string
-    sql: ${TABLE}.email_id ;;
-  }
+#   dimension: email_id {
+#     type: string
+#     sql: ${TABLE}.email_id ;;
+#   }
 
   dimension: event {
     type: string
@@ -98,19 +98,19 @@ view: web_push_delivered {
     sql: ${TABLE}.labels ;;
   }
 
-  dimension_group: loaded {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.loaded_at ;;
-  }
+#   dimension_group: loaded {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.loaded_at ;;
+#   }
 
   dimension: message_id {
     type: string
@@ -122,38 +122,38 @@ view: web_push_delivered {
     sql: ${TABLE}.message_type_id ;;
   }
 
-  dimension: original_timestamp {
-    type: string
-    sql: ${TABLE}.original_timestamp ;;
-  }
+#   dimension: original_timestamp {
+#     type: string
+#     sql: ${TABLE}.original_timestamp ;;
+#   }
 
-  dimension_group: received {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.received_at ;;
-  }
-
-  dimension_group: sent {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.sent_at ;;
-  }
+#   dimension_group: received {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.received_at ;;
+#   }
+#
+#   dimension_group: sent {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.sent_at ;;
+#   }
 
   dimension: template_id {
     type: number
@@ -184,19 +184,19 @@ view: web_push_delivered {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension_group: uuid_ts {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.uuid_ts ;;
-  }
+#   dimension_group: uuid_ts {
+#     type: time
+#     timeframes: [
+#       raw,
+#       time,
+#       date,
+#       week,
+#       month,
+#       quarter,
+#       year
+#     ]
+#     sql: ${TABLE}.uuid_ts ;;
+#   }
 
   dimension: web_push_body {
     type: string
@@ -220,6 +220,11 @@ view: web_push_delivered {
 
   measure: count {
     type: count
-    drill_fields: [id, campaign_name, context_integration_name, context_library_name, template_name]
+    drill_fields: [id, campaign_name, template_name]
+  }
+
+  measure: distinct_user {
+    type:  count_distinct
+    sql: ${anonymous_id} ;;
   }
 }
