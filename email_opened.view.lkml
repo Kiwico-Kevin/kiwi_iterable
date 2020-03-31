@@ -4,7 +4,6 @@ view: email_opened {
   dimension: id {
     primary_key: yes
     type: string
-    hidden: yes
     sql: ${TABLE}.id ;;
   }
 
