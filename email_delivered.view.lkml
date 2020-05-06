@@ -13,7 +13,7 @@ view: email_delivered {
   }
 
   dimension: campaign_id {
-    type: number
+    type: string
     sql: ${TABLE}.campaign_id ;;
   }
 
