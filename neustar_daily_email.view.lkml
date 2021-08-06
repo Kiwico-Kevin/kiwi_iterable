@@ -28,7 +28,7 @@ view: newstar_daily_email {
       ORDER BY
           4 DESC
       LIMIT 500
-      SELECT FLOOR((EXTRACT(epoch from GETDATE()) - 60*60*6)/(60*60*24))
+      sql_trigger_value:SELECT FLOOR((EXTRACT(epoch from GETDATE()) - 60*60*6)/(60*60*24))
        ;;
   }
 
