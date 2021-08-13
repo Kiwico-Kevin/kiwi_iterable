@@ -157,6 +157,7 @@ view: email_delivered {
     timeframes: [
       raw,
       time,
+      hour,
       date,
       week,
       month,
