@@ -165,6 +165,7 @@ view: email_delivered {
       year
     ]
     sql: ${TABLE}.sent_at ;;
+    convert_tz: no
   }
 
   dimension: template_id {
