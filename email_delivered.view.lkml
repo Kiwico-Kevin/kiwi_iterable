@@ -164,8 +164,8 @@ view: email_delivered {
       quarter,
       year
     ]
-    sql: ${TABLE}.sent_at ;;
     convert_tz: no
+    sql: ${TABLE}.sent_at ;;
   }
 
   dimension: template_id {
