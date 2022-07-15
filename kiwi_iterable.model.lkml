@@ -1,5 +1,8 @@
 connection: "kiwi_iterable"
 
+# - start day
+week_start_day: sunday
+
 # include all the views
 include: "*.view"
 
